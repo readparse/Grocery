@@ -5,3 +5,10 @@
 <input name=name value="[%item.name%]">
 <input type=submit value="Save">
 </form>
+
+<ul>
+[%FOREACH list = item.lists %]
+	<li><a href="/list/[%list.id%]">[%list.name%]</a>
+[%END%]
+</ul>
+
