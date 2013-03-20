@@ -6,6 +6,7 @@ use Grocery::ListItem;
 use Grocery::Manager::Item;
 use Grocery::Manager::List;
 use Grocery::Manager::Status;
+use Grocery::Manager::ListItem;
 use Data::Dumper;
 
 use Dancer ':syntax';
@@ -106,6 +107,16 @@ get '/item/edit/:id' => sub {
 		$data->{list} = $list;
 	}
 	template 'item_form', $data;
+};
+
+get '/item/:item_id/list/remove/:list_id' => sub {
+	my $item_id = params->{item_id};
+	my $list_id = params->{list_id};
+	my $list_items = Grocery::Manager::ListItem->get_list_items( query => [ list_id => $list_id, item_id => $item_id ]);
+	if (my $list_item = shift @{$list_items}) {
+		$list_item->delete;
+	}
+	redirect "/list/$list_id";
 };
 
 true;
