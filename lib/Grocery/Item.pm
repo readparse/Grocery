@@ -8,6 +8,16 @@ __PACKAGE__->meta->setup(
 	pk_columns => 'id',
 	unique_key => 'name',
 
+	relationships => [
+	
+		lists => {
+			type => 'many to many',
+			map_class => 'Grocery::ListItem',
+			map_from => 'item',
+			map_to => 'list',
+		}
+	]
+
 );
 
 
