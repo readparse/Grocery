@@ -1,0 +1,6 @@
+
+<form method=post action="/list/save">
+<input type=hidden name="list_id" value="[%list.id%]">
+<input name=name value="[%list.name%]">
+<input type=submit value="Save">
+</form>

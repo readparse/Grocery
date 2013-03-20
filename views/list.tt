@@ -1,0 +1,30 @@
+
+
+
+<form method=post action="/item/create">
+<input type="hidden" name="list_id" value="[%list.id%]">
+<b>Name:</b> [% list.name %] (<a href="/list/edit/[%list.id%]">edit</a>)<br>
+
+<input id=newitem name="item">
+<input type="submit" value="Add Item">
+</form>
+<script>document.getElementById('newitem').focus()</script>
+
+<b>Items:</b>
+
+
+
+[% IF list.items.size %]
+	<ul>
+	[% FOREACH item = list.items %]
+		<li><a href="/item/edit/[%item.id%]?list_id=[%list.id%]">[% item.name %]</a>
+	[% END %]
+	</ul>
+[% ELSE %]
+	No items
+[% END %]
+
+
+
+
+
