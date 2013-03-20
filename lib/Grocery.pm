@@ -47,8 +47,12 @@ post '/list/save' => sub {
 
 get '/list/:id' => sub {
 	my $id = params->{id};
-	my $list = Grocery::List->new( id => $id )->load;
-	template 'list', { list => $list }
+	my $list = Grocery::List->new( id => $id );
+	if ($list->load(speculative => 1)) {
+		template 'list', { list => $list }
+	} else {
+		template 'no_list', { id => $id }
+	}
 };
 
 post '/item/save' => sub {
@@ -68,14 +72,15 @@ post '/item/save' => sub {
 };
 
 post '/item/create' => sub {
-	my $name = params->{item};
 	my $list_id = params->{list_id};
-	my $list = Grocery::List->new( id => $list_id );
-	if ($list->load) {
-		$list->add_items( { name => $name });
-		$list->save;
-		redirect "/list/$list_id";
+	if (my $name = params->{item}) {
+		my $list = Grocery::List->new( id => $list_id );
+		if ($list->load) {
+			$list->add_items( { name => $name });
+			$list->save;
+		}
 	}
+	redirect "/list/$list_id";
 };
 
 get '/item/edit/:id' => sub {
