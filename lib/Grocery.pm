@@ -84,6 +84,13 @@ post '/item/save' => sub {
 	}
 };
 
+get '/item/delete/:id' => sub {
+	my $item_id = params->{id};
+	my $item = Grocery::Item->new( id => $item_id );
+	$item->delete;
+	redirect "/lists";	
+};
+
 post '/item/create' => sub {
 	my $list_id = params->{list_id};
 	if (my $name = params->{item}) {

@@ -1,4 +1,7 @@
 
+<a href="/item/delete/[%item.id%]" onclick="return confirm('Are you sure you want to permanently delete this item from all lists?')">delete</a> this item (this will remove the item from all lists)
+<p>
+
 <form method=post action="/item/save">
 <input type=hidden name="item_id" value="[%item.id%]">
 <input type=hidden name="list_id" value="[%list.id%]">
