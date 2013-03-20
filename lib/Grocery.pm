@@ -16,6 +16,11 @@ get '/' => sub {
     template 'index';
 };
 
+get '/lists' => sub {
+	my $lists = Grocery::Manager::List->get_lists();
+	template 'lists', { lists => $lists }
+};
+
 get '/list/new' => sub {
 	template 'list_form'
 };
