@@ -3,7 +3,10 @@
 
 <form method=post action="/item/create">
 <input type="hidden" name="list_id" value="[%list.id%]">
-<b>Name:</b> [% list.name %] (<a href="/list/edit/[%list.id%]">edit</a>)<br>
+<b>Name:</b> [% list.name %] 
+	(<a href="/list/edit/[%list.id%]">edit</a>) 
+	(<a href="/list/delete/[%list.id%]" onclick="return confirm('Are you sure you want to delete this list?')">delete</a>) 
+	<br>
 
 <input id=newitem name="item">
 <input type="submit" value="Add Item">

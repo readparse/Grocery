@@ -32,6 +32,13 @@ get '/list/edit/:id' => sub {
 	template 'list_form', { list => $list };
 };
 
+get '/list/delete/:id' => sub {
+	my $id = params->{id};
+	my $list = Grocery::List->new( id => $id );
+	$list->delete;
+	redirect '/lists'
+};
+
 post '/list/save' => sub {
 	my $id = params->{list_id};
 	my $name = params->{name};
