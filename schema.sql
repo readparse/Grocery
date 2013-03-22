@@ -25,7 +25,8 @@ create table list_item(
 	list_id integer references list(id) on delete cascade,
 	item_id integer references item(id) on delete cascade,
 	sequence integer,
-	status_id integer references status(id) on delete set null
+	status_id integer references status(id) on delete set null,
+	constraint uniq_list_item unique (list_id, item_id)
 );
 
 

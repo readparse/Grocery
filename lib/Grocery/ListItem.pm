@@ -6,6 +6,7 @@ __PACKAGE__->meta->setup(
 	table => 'list_item',
 	columns => [ qw( id list_id item_id ) ],
 	pk_columns => 'id',
+	unique_key => [ list_id, item_id ],
 
 	foreign_keys => [
 		list => {
