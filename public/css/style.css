@@ -52,6 +52,9 @@ padding-left: 75px;
 padding-right: 30px;
 }
 
+.headernav {
+	margin: 10px;
+}
 
 #header {
 background-image: url("/images/perldancer.jpg");
