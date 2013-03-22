@@ -20,6 +20,10 @@ create table status(
 	name varchar(255) unique
 );
 
+insert into status (name) values('Pending');
+insert into status (name) values('Priced');
+insert into status (name) values('Purchased');
+
 create table list_item(
 	id integer primary key autoincrement,
 	list_id integer references list(id) on delete cascade,
