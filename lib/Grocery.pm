@@ -95,12 +95,16 @@ post '/item/add_to_list' => sub {
 	my $list_id = params->{list_id};
 	if (my $name = params->{item}) {
 		my $list = Grocery::List->new( id => $list_id );
-		my $item = Grocery::Item->new( name => $name )->load;
+		my $item = Grocery::Item->new( name => $name );
 		if ($list->load) {
-			if ($list->can_add_item( $item )) {
+			if ($item->load( speculative => 1 )) {
+				if ($list->can_add_item( $item )) {
+					$list->add_items( $item );
+				}
+			} else {
 				$list->add_items( { name => $name });
-				$list->save;
 			}
+			$list->save;
 		}
 	}
 	redirect "/list/$list_id";
