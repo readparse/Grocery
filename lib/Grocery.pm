@@ -52,7 +52,11 @@ post '/list/save' => sub {
 		}
 	} else {
 		$list = Grocery::List->new( name => $name );
-		$list->save;
+		if ($list->load( speculative => 1 )) {
+			return template 'list_exists', { list => $list };
+		} else {
+			$list->save;
+		}
 	}
 	my $list_id = $list->id;
 	redirect "list/$list_id";
