@@ -4,7 +4,7 @@ use POSIX qw( ceil );
 
 __PACKAGE__->meta->setup(
 	table => 'list_item',
-	columns => [ qw( id list_id item_id ) ],
+	columns => [ qw( id list_id item_id sequence status_id) ],
 	pk_columns => 'id',
 	unique_key => [ list_id, item_id ],
 
@@ -16,6 +16,10 @@ __PACKAGE__->meta->setup(
 		item => {
 			class => 'Grocery::Item',
 			key_columns => {item_id => 'id'}
+		},
+		status => {
+			class => 'Grocery::Status',
+			key_columns => {status_id => 'id'}
 		},
 	],
 
