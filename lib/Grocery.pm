@@ -105,6 +105,7 @@ post '/item/add_to_list' => sub {
 				$list->add_items( { name => $name });
 			}
 			$list->save;
+			$list->set_blank_item_status( config->{default_status} );
 		}
 	}
 	redirect "/list/$list_id";
