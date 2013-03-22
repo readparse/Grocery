@@ -1,7 +1,15 @@
 
 
+[% IF lists.size %]
+
 <ul>
-[% FOREACH list = lists %]
-	<li><a href="/list/[%list.id%]">[% list.name %]</a>
-[% END %]
+	[% FOREACH list = lists %]
+		<li><a href="/list/[%list.id%]">[% list.name %]</a>
+	[% END %]
 </ul>
+
+[% ELSE %]
+
+	No Lists.  <a href="/list/new">Create one?</a>
+
+[% END %]
