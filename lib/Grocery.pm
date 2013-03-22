@@ -13,8 +13,25 @@ use Dancer ':syntax';
 
 our $VERSION = '0.1';
 
+hook before_template => sub {
+	my $hash = shift;
+	if (my $username = session('username')) {
+		$hash->{username} = $username;
+	}
+};
+
 get '/' => sub {
     redirect '/lists';
+};
+
+get '/login' => sub {
+	session username => 'readparse';
+	redirect request->referer;
+};
+
+get '/logout' => sub {
+	session->destroy;
+	redirect request->referer;
 };
 
 get '/lists' => sub {

@@ -15,10 +15,25 @@
 </head>
 <body>
 
-<div class="headernav">
-	<a href="/lists">All Lists</a> |
-	<a href="/list/new">New List</a> 
-</div>
+<table width=100%>
+	<tr>
+		<td width=50%>
+			<div class="headernav">
+				<a href="/lists">All Lists</a> |
+				<a href="/list/new">New List</a> 
+			</div>
+		</td>
+		<td width=50% align=right>
+			<div class="headernav">
+				[% IF username %]
+					[% username %] (<a href="/logout">Log Out</a>)
+				[% ELSE %]
+					<a href="/login">Log In</a> 
+				[% END %]
+			</div>
+		</td>
+	</tr>
+</table>
 
 
 
