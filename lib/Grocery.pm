@@ -91,13 +91,16 @@ get '/item/delete/:id' => sub {
 	redirect "/lists";	
 };
 
-post '/item/create' => sub {
+post '/item/add_to_list' => sub {
 	my $list_id = params->{list_id};
 	if (my $name = params->{item}) {
 		my $list = Grocery::List->new( id => $list_id );
+		my $item = Grocery::Item->new( name => $name )->load;
 		if ($list->load) {
-			$list->add_items( { name => $name });
-			$list->save;
+			if ($list->can_add_item( $item )) {
+				$list->add_items( { name => $name });
+				$list->save;
+			}
 		}
 	}
 	redirect "/list/$list_id";

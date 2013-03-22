@@ -1,7 +1,7 @@
 
 
 
-<form method=post action="/item/create">
+<form method=post action="/item/add_to_list">
 <input type="hidden" name="list_id" value="[%list.id%]">
 <b>Name:</b> [% list.name %] 
 	(<a href="/list/edit/[%list.id%]">edit</a>) 

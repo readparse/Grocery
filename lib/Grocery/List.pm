@@ -20,6 +20,15 @@ __PACKAGE__->meta->setup(
 	]
 );
 
-
+sub can_add_item {
+	my $this = shift;
+	my $item = shift;
+	for my $i($this->items) {
+		if ($item->id == $i->id) {
+			return 0;
+		}
+	}
+	return 1;
+}
 
 1;
