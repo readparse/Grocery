@@ -20,7 +20,7 @@
 [% IF list.items.size %]
 	<ul>
 	[% FOREACH item = list.items %]
-		<li><a href="/item/edit/[%item.id%]?list_id=[%list.id%]">[% item.name %]</a> <a href="/item/[%item.id%]/list/remove/[%list.id%]" onclick="return confirm('Are you sure you want to delete this item from this list?')">✖</a>
+		<li><a href="/item/edit/[%item.id%]?list_id=[%list.id%]">[% item.name %]</a> <a href="/item/[%item.id%]/list/remove/[%list.id%]">✖</a>
 	[% END %]
 	</ul>
 [% ELSE %]
