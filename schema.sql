@@ -4,6 +4,15 @@ drop table list_item;
 drop table item;
 drop table list;
 drop table status;
+drop table user;
+
+create table user(
+	id integer primary key autoincrement,
+	email varchar(255) unique,
+	password varchar(255),
+	created datetime default(current_timestamp),
+	lastlogin datetime
+);
 
 create table list(
 	id integer primary key autoincrement,

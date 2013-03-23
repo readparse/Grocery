@@ -25,8 +25,8 @@
 		</td>
 		<td width=50% align=right>
 			<div class="headernav">
-				[% IF username %]
-					[% username %] (<a href="/logout">Log Out</a>)
+				[% IF user %]
+					[% user.email %] (<a href="/logout">Log Out</a>)
 				[% ELSE %]
 					<a href="/login">Log In</a> 
 				[% END %]

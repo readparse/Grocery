@@ -3,10 +3,12 @@ use Grocery::List;
 use Grocery::Item;
 use Grocery::Status;
 use Grocery::ListItem;
+use Grocery::User;
 use Grocery::Manager::Item;
 use Grocery::Manager::List;
 use Grocery::Manager::Status;
 use Grocery::Manager::ListItem;
+use Crypt::SaltedHash;
 use Data::Dumper;
 
 use Dancer ':syntax';
@@ -15,8 +17,8 @@ our $VERSION = '0.1';
 
 hook before_template => sub {
 	my $hash = shift;
-	if (my $username = session('username')) {
-		$hash->{username} = $username;
+	if (my $user = session('user')) {
+		$hash->{user} = $user;
 	}
 };
 
@@ -25,8 +27,23 @@ get '/' => sub {
 };
 
 get '/login' => sub {
-	session username => 'readparse';
-	redirect request->referer;
+	template 'login_form'
+};
+
+post '/login' => sub {
+	my $email = params->{email};
+	my $password = params->{password};
+	my $user = Grocery::User->new( email => $email );
+	if ($user->load( speculative => 1 ) ) {
+		if ($user->authenticate($password)) {
+			session user => $user->values;
+			redirect '/';
+		} else {
+			return "password is incorrect";
+		}
+	} else {
+		return "this user does not exist";
+	}
 };
 
 get '/logout' => sub {
