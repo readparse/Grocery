@@ -5,7 +5,8 @@
 # Your application's name
 appname: "Grocery"
 default_status: "Pending"
-session: "Simple"
+session: "cookie"
+session_cookie_key: "A19WRse9c0ueNzbCfgOw8DyEEzfkfluV"
 
 # The default layout to use for your application (located in
 # views/layouts/main.tt)

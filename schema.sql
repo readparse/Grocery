@@ -10,6 +10,7 @@ create table user(
 	id integer primary key autoincrement,
 	email varchar(255) unique,
 	password varchar(255),
+	token varchar(255),
 	created datetime default(current_timestamp),
 	lastlogin datetime
 );
