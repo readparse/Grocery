@@ -28,15 +28,15 @@ sub email_available {
 
 sub save {
 	my $self = shift;
-	if (my $password = $self->password) {
-		unless ($password =~ /^\{SSHA1\}/) {
+	if ( my $password = $self->password ) {
+		unless ( $password =~ /^\{SSHA1\}/ ) {
 			my $dsh = Crypt::SaltedHash->new( algorithm => 'SHA1' );
 			$dsh->add($password);
 			my $salted = $dsh->generate;
-			$self->password($salted);
+			$self->password( $salted );
 		}
 	}
-	$self->SUPER::save(@_);
+	$self->SUPER::save( @_ );
 }
 
 sub authenticate {
