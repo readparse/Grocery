@@ -35,11 +35,10 @@ post '/login' => sub {
 	my $password = params->{password};
 	my $user = Grocery::User->new( email => $email );
 	if ($user->load( speculative => 1 ) ) {
-		if (my $token = $user->authenticate($password)) {
+		if ($user->authenticate($password)) {
 			session user => {
 				id => $user->id,
 				email => $user->email,
-				token => $user->token,
 			};
 			redirect '/';
 		} else {

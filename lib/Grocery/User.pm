@@ -9,7 +9,6 @@ __PACKAGE__->meta->setup(
 		id => { type => 'integer', not_null => 1 }, 
 		email => { type => 'varchar', length => 255, not_null => 1},
 		password => { type => 'varchar', length => 255, not_null => 1}, 
-		token => { type => 'varchar', length => 255 }, 
 		created => { type => 'timestamp', default => 'now' }, 
 		lastlogin => { type => 'timestamp'} 
 	 ],
@@ -43,12 +42,9 @@ sub save {
 sub authenticate {
 	my ($self, $password) = @_;
 	if ( Crypt::SaltedHash->validate($self->password, $password) ) {
-		my @chars = (0..9, 'a'..'z', 'A'..'Z');
-		my $token = join('', map { $chars[rand @chars] } (1..16));
-		$self->token($token);
 		$self->lastlogin(DateTime->now);
 		$self->save;
-		return $token;
+		return 1;
 	}
 }
 
