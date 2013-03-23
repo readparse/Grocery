@@ -1,0 +1,9 @@
+
+
+<div class=warn>
+	bad login
+</div>
+
+
+
+[% INCLUDE login_form.tt %]

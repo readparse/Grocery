@@ -41,12 +41,9 @@ post '/login' => sub {
 				email => $user->email,
 			};
 			redirect '/';
-		} else {
-			return "password is incorrect";
 		}
-	} else {
-		return "this user does not exist";
 	}
+	template 'bad_login';
 };
 
 get '/logout' => sub {
